@@ -36,6 +36,10 @@ spring:
   # = LIQUIBASE configurations #########################################
   liquibase:
     change-log: classpath:db/liquibase-changelog.xml
+  # = SERVER configurations #########################################
+  server:
+    error:
+      include-message: always
 
 ## ===============================
 ## = ELIDE configurations
