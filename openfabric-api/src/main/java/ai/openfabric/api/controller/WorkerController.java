@@ -7,13 +7,7 @@ import ai.openfabric.api.payload.WorkerListResponse;
 import ai.openfabric.api.payload.WorkerStatResponse;
 import ai.openfabric.api.service.WorkerService;
 import ai.openfabric.api.utils.Constants;
-import ai.openfabric.api.utils.LocalDateTimeDeserializer;
 import ai.openfabric.api.utils.Result;
-import com.github.dockerjava.api.command.InspectContainerResponse;
-import com.github.dockerjava.api.model.ContainerConfig;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,10 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import javax.ws.rs.QueryParam;
-import java.time.LocalDateTime;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController

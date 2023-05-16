@@ -3,31 +3,21 @@ package ai.openfabric.api.service;
 import ai.openfabric.api.model.Worker;
 import ai.openfabric.api.payload.CreateWorkerRequest;
 import ai.openfabric.api.payload.WorkerCreateResponse;
-import ai.openfabric.api.payload.WorkerInformationResponse;
 import ai.openfabric.api.utils.Result;
 import ai.openfabric.api.repository.WorkerRepository;
 import ai.openfabric.api.payload.WorkerListResponse;
 import ai.openfabric.api.utils.Constants;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class WorkerService {
