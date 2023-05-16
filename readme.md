@@ -16,4 +16,4 @@ You can access Swagger by navigating to the following link: http://localhost:808
 
 ## Available Routes
 
-![routes](https://i.ibb.co/tH0wMv3/2023-05-17-02-39.png)
+![routes](https://imgur.com/WdkgBHO.png)
