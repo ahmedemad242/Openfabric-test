@@ -14,6 +14,8 @@ public class JsonParser {
         while ((line = reader.readLine()) != null) {
             stringBuilder.append(line);
         }
+        if(stringBuilder.toString() == null || stringBuilder.toString().equals(""))
+            return null;
         return new com.google.gson.JsonParser().parse(stringBuilder.toString()).getAsJsonObject();
     }
 }
