@@ -47,16 +47,14 @@
     <changeSet id="WO_02" author="ahmed">
         <addColumn tableName="worker">
             <column name="container_id" type="varchar(255)"/>
-            <column name="image_name" type="varchar(255)"/>
-            <column name="image_id" type="varchar(255)"/>
-            <column name="ip_address" type="varchar(255)"/>
+            <column name="image" type="varchar(255)"/>
         </addColumn>
 
         <createTable tableName="worker_exposed_ports" remarks="Worker exposed ports table">
             <column name="worker_id" type="${uuid_type}">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_pv_worker"/>
             </column>
-            <column name="port_number" type="integer">
+            <column name="port_number" type="varchar(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_pv_worker"/>
             </column>
         </createTable>

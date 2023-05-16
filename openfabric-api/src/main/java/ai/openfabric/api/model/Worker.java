@@ -24,26 +24,20 @@ public class Worker extends Datable implements Serializable {
     @Setter
     private String containerId;
 
-    @Getter
-    @Setter
-    private String imageName;
 
     @Getter
     @Setter
-    private String imageId;
+    private String image;
 
     @Getter
     @Setter
     private String name;
 
-    @Getter
-    @Setter
-    private String ipAddress;
 
     @ElementCollection
     @CollectionTable(name = "worker_exposed_ports", joinColumns = @JoinColumn(name = "worker_id"))
-    @Column(name = "exposed_port")
+    @Column(name = "port_number")
     @Getter
     @Setter
-    private List<Integer> exposedPorts;
+    private List<String> exposedPorts;
 }
