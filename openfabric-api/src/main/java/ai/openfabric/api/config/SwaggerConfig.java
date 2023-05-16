@@ -27,12 +27,6 @@ public class SwaggerConfig implements WebMvcConfigurer {
     @Bean
     public Docket restApi() {
 
-        List<SecurityScheme> securitySchemes = Lists.newArrayList(
-                new ApiKey("Authorization", "Authorization", "header"));
-        List<SecurityContext> securityContexts = Lists.newArrayList(
-                xAuthTokenSecurityContext()
-        );
-
         return new Docket(DocumentationType.OAS_30)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("ai.openfabric"))
@@ -40,8 +34,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .build()
                 .groupName("REST-API")
                 .apiInfo(getApiInfo())
-                .securitySchemes(securitySchemes)
-                .securityContexts(securityContexts);
+                .useDefaultResponseMessages(false);
     }
 
     private static ApiInfo getApiInfo() {

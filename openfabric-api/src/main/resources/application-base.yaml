@@ -65,3 +65,9 @@ logging:
 node:
   api:
     path: /api/v1
+
+# ===============================
+# = DOCUMENTATION configurations
+# ===============================
+springdoc:
+  override-with-generic-response: false
