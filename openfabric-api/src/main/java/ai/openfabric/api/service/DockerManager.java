@@ -36,7 +36,7 @@ public class DockerManager {
     }
 
     /**
-     * Get container statistics serves the route /containers/{containerId}/stats
+     * Get container statistics serves the route /worker/{containerId}/stats
      * @param containerId container id
      * @return Result object
      */
@@ -50,7 +50,7 @@ public class DockerManager {
     }
 
     /**
-     * Get container information serves the route /containers/{containerId}/info
+     * Get container information serves the route /worker/{containerId}/info
      * @param containerId container id
      * @return Result object
      */
@@ -64,7 +64,7 @@ public class DockerManager {
     }
 
     /**
-     * Start a container serves the route /containers/{containerId}/start
+     * Start a container serves the route /worker/{containerId}/start
      * @param containerId container id
      * @return Result object
      */
@@ -78,7 +78,7 @@ public class DockerManager {
     }
 
     /**
-     * Stop a container serves the route /containers/{containerId}/stop
+     * Stop a container serves the route /worker/{containerId}/stop
      * @param containerId container id
      * @return Result object
      */
@@ -92,7 +92,7 @@ public class DockerManager {
     }
 
     /**
-     * Remove a container serves the route /containers/{containerId}
+     * Remove a container serves the route /worker/{containerId}
      * @param containerId container id
      * @return Result object
      */
@@ -106,7 +106,7 @@ public class DockerManager {
     }
 
     /**
-     * Create a container serves the route /containers/create
+     * Create a container serves the route /worker/create
      * @param requestBody requestBody
      * @return Result object
      */

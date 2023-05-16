@@ -44,5 +44,32 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="WO_02" author="ahmed">
+        <addColumn tableName="worker">
+            <column name="containerId" type="varchar(255)"/>
+            <column name="imageName" type="varchar(255)"/>
+            <column name="imageId" type="varchar(255)"/>
+            <column name="ipAddress" type="varchar(255)"/>
+        </addColumn>
+
+        <createTable tableName="worker_exposed_ports" remarks="Worker exposed ports table">
+            <column name="worker_id" type="${uuid_type}">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_pv_worker"/>
+            </column>
+            <column name="port_number" type="integer">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_pv_worker"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="worker_exposed_ports"
+                                 baseColumnNames="worker_id"
+                                 constraintName="FK_worker_exposed_ports_worker"
+                                 referencedTableName="worker"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+    </changeSet>
+
+
 
 </databaseChangeLog>

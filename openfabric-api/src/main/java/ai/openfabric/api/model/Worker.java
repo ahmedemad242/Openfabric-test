@@ -1,17 +1,16 @@
 package ai.openfabric.api.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
+import javax.persistence.*;
 
-@Entity()
+import java.io.Serializable;
+import java.util.List;
+
+@Entity
+@Table(name = "worker")
 public class Worker extends Datable implements Serializable {
 
     @Id
@@ -19,9 +18,32 @@ public class Worker extends Datable implements Serializable {
     @GenericGenerator(name = "of-uuid", strategy = "ai.openfabric.api.model.IDGenerator")
     @Getter
     @Setter
-    public String id;
+    private String id;
 
-    public String name;
+    @Getter
+    @Setter
+    private String containerId;
 
+    @Getter
+    @Setter
+    private String imageName;
 
+    @Getter
+    @Setter
+    private String imageId;
+
+    @Getter
+    @Setter
+    private String name;
+
+    @Getter
+    @Setter
+    private String ipAddress;
+
+    @ElementCollection
+    @CollectionTable(name = "worker_exposed_ports", joinColumns = @JoinColumn(name = "worker_id"))
+    @Column(name = "exposed_port")
+    @Getter
+    @Setter
+    private List<Integer> exposedPorts;
 }
