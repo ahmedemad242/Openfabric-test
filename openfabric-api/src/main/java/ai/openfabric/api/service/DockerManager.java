@@ -19,7 +19,6 @@ import com.github.dockerjava.transport.DockerHttpClient.Request;
 import com.github.dockerjava.transport.DockerHttpClient.Response;
 import ai.openfabric.api.utils.JsonParser;
 import ai.openfabric.api.utils.Result;
-import com.google.gson.JsonObject;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
