@@ -46,10 +46,10 @@
 
     <changeSet id="WO_02" author="ahmed">
         <addColumn tableName="worker">
-            <column name="containerId" type="varchar(255)"/>
-            <column name="imageName" type="varchar(255)"/>
-            <column name="imageId" type="varchar(255)"/>
-            <column name="ipAddress" type="varchar(255)"/>
+            <column name="container_id" type="varchar(255)"/>
+            <column name="image_name" type="varchar(255)"/>
+            <column name="image_id" type="varchar(255)"/>
+            <column name="ip_address" type="varchar(255)"/>
         </addColumn>
 
         <createTable tableName="worker_exposed_ports" remarks="Worker exposed ports table">
