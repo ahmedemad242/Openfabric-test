@@ -7,6 +7,10 @@
 
 package ai.openfabric.api.service;
 
+import ai.openfabric.api.payload.Message;
+import ai.openfabric.api.payload.WorkerCreateResponse;
+import ai.openfabric.api.payload.WorkerInformationResponse;
+import ai.openfabric.api.payload.WorkerStatResponse;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
@@ -16,11 +20,13 @@ import com.github.dockerjava.transport.DockerHttpClient.Response;
 import ai.openfabric.api.utils.JsonParser;
 import ai.openfabric.api.utils.Result;
 import com.google.gson.JsonObject;
+import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.time.Duration;
 import java.util.Map;
 
+@Service
 public class DockerManager {
     private final DockerHttpClient dockerHttpClient;
 
@@ -36,7 +42,7 @@ public class DockerManager {
     }
 
     /**
-     * Get container statistics serves the route /worker/{containerId}/stats
+     * Get container statistics
      * @param containerId container id
      * @return Result object
      */
@@ -46,25 +52,25 @@ public class DockerManager {
                 .path("/containers/" + containerId + "/stats?stream=0")
                 .build();
 
-        return requestToResult(request);
+        return requestToResult(request, WorkerStatResponse.class);
     }
 
     /**
-     * Get container information serves the route /worker/{containerId}/info
+     * Get container information
      * @param containerId container id
      * @return Result object
      */
-    public Result getContainerInfo(String containerId) {
+        public Result getContainerInfo(String containerId) {
         Request request = Request.builder()
                 .method(Request.Method.GET)
                 .path("/containers/" + containerId + "/json")
                 .build();
 
-        return requestToResult(request);
+        return requestToResult(request, WorkerInformationResponse.class);
     }
 
     /**
-     * Start a container serves the route /worker/{containerId}/start
+     * Start a container
      * @param containerId container id
      * @return Result object
      */
@@ -74,11 +80,11 @@ public class DockerManager {
                 .path("/containers/" + containerId + "/start")
                 .build();
 
-        return requestToResult(request);
+        return requestToResult(request, null);
     }
 
     /**
-     * Stop a container serves the route /worker/{containerId}/stop
+     * Stop a container
      * @param containerId container id
      * @return Result object
      */
@@ -88,11 +94,11 @@ public class DockerManager {
                 .path("/containers/" + containerId + "/stop")
                 .build();
 
-        return requestToResult(request);
+        return requestToResult(request, null);
     }
 
     /**
-     * Remove a container serves the route /worker/{containerId}
+     * Remove a container
      * @param containerId container id
      * @return Result object
      */
@@ -102,24 +108,26 @@ public class DockerManager {
                 .path("/containers/" + containerId)
                 .build();
 
-        return requestToResult(request);
+        return requestToResult(request, null);
     }
 
     /**
-     * Create a container serves the route /worker/create
+     * Create a container
      * @param requestBody requestBody
      * @return Result object
      */
-    public Result createContainer(InputStream requestBody) {
+    public Result createContainer(String containerName, InputStream requestBody) {
         Map<String, String> headers = Map.of("Content-Type", "application/json");
         Request request = Request.builder()
                 .method(Request.Method.POST)
-                .path("/containers/create")
+                .path("/containers/create?name="+containerName)
                 .headers(headers)
                 .body(requestBody)
                 .build();
 
-        return requestToResult(request);
+
+
+        return requestToResult(request, WorkerCreateResponse.class);
     }
 
 
@@ -130,18 +138,22 @@ public class DockerManager {
      * @param request request object
      * @return Result object
      */
-    private Result requestToResult(Request request){
+    private Result requestToResult(Request request, Class type){
         try {
             Response response = dockerHttpClient.execute(request);
-            JsonObject responseBody = JsonParser.parse(response.getBody());
+
             if (response.getStatusCode() < 400) {
+                Object responseBody = JsonParser.parse(response.getBody(), type);
                 return Result.success(response.getStatusCode(), responseBody);
             } else {
-                return Result.failure(response.getStatusCode(), responseBody.get("message").getAsString());
+                Object responseBody = JsonParser.parse(response.getBody(), Message.class);;
+                return Result.failure(response.getStatusCode(), ((Message) responseBody).getMessage());
             }
 
         } catch (Exception e) {
             return Result.failure(500, e.getMessage());
         }
     }
+
+
 }
