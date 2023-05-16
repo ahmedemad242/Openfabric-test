@@ -33,6 +33,7 @@ dependencies {
     implementation "io.springfox:springfox-boot-starter:3.0.0"
     implementation "com.github.docker-java:docker-java-core:3.3.0"
     implementation "com.github.docker-java:docker-java-transport-httpclient5:3.3.0"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0"
     //-------
     implementation 'org.springframework.boot:spring-boot-starter-web:2.7.5'
     implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.5'
